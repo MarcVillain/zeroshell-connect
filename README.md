@@ -1,10 +1,10 @@
 ZeroShell connect
 ===
 
-This script allows for automatic logging on the [Captive Portal](https://zeroshell.org/shibboleth-captive-portal/) of the Linux
+This script allows for automatic login on the [Captive Portal](https://zeroshell.org/shibboleth-captive-portal/) of the Linux
 Distribution [Zeroshell](https://zeroshell.org).
 
-This was inspired from this [zeroshell-autologin](https://code.google.com/archive/p/zeroshell-autologin/) python script.
+This was inspired by this [zeroshell-autologin](https://code.google.com/archive/p/zeroshell-autologin/) python script.
 
 # How to install
 
@@ -59,13 +59,13 @@ WantedBy = multi-user.target
 
 Enable the service to make it start upon startup and start it:
 ```
-systemctl enable zeroshellconnect.service
-systemctl start zeroshellconnect.service
+sudo systemctl enable zeroshellconnect.service
+sudo systemctl start zeroshellconnect.service
 ```
 
 Check that everything went well:
 ```
-systemctl status zeroshellconnect.service
+sudo systemctl status zeroshellconnect.service
 ```
 
 # Authors
