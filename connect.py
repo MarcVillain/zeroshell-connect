@@ -46,14 +46,18 @@ def msg_then_done(msg):
             ret_val = func(*args, **kwargs)
             logger.info(msg + "...Done")
             return ret_val
+
         return _msg_then_done
+
     return decorator
+
 
 class Parametor:
     """
     Helps to build the required parameters before doing
     any request to the server.
     """
+
     @staticmethod
     def _gen_default():
         return {"ZSCPRedirect": ZSCP_REDIRECT}
@@ -102,6 +106,7 @@ class MyRequest:
     """
     Handle all the requests to the server.
     """
+
     def __init__(self):
         self.url = ZSCP_URL
         self.auth_key = None
@@ -139,7 +144,7 @@ class MyRequest:
             return False
 
         # Extract auth key from hidden inputs
-        soup = BeautifulSoup(content, 'html.parser')
+        soup = BeautifulSoup(content, "html.parser")
         hidden_tags = soup.find_all(name="input", type="hidden")
         for tag in hidden_tags:
             if tag.get("name") == "Authenticator":
@@ -185,11 +190,11 @@ def setup_logging(verbose, silent, output):
 
     # Setup format
     logger.setLevel(log_level)
-    formatter = logging.Formatter('%(asctime)s :: %(levelname)s :: %(message)s')
+    formatter = logging.Formatter("%(asctime)s :: %(levelname)s :: %(message)s")
 
     # Setup file logging
     if output:
-        file_handler = RotatingFileHandler(output, 'a', 1000000, 1)
+        file_handler = RotatingFileHandler(output, "a", 1000000, 1)
         file_handler.setLevel(log_level)
         file_handler.setFormatter(formatter)
         logger.addHandler(file_handler)
@@ -222,7 +227,7 @@ def main(args):
             # Keep on trying to renew connection until something goes wrong
             while True:
                 # Check if we have Internet access
-                if subprocess.call(['ping', '-c', '1', '8.8.8.8']) != 0:
+                if subprocess.call(["ping", "-c", "1", "8.8.8.8"]) != 0:
                     raise Exception("No Internet Access")
 
                 # Renew connection
@@ -238,8 +243,12 @@ def main(args):
 
 def parse_command_line(argv):
     parser = argparse.ArgumentParser()
-    parser.add_argument("-v", "--verbose", action="store_true", help="Set logging level to DEBUG.")
-    parser.add_argument("-s", "--silent", action="store_true", help="Do not log to stdout.")
+    parser.add_argument(
+        "-v", "--verbose", action="store_true", help="Set logging level to DEBUG."
+    )
+    parser.add_argument(
+        "-s", "--silent", action="store_true", help="Do not log to stdout."
+    )
     parser.add_argument("-o", "--output", metavar="FILE", help="Log to file.")
     return parser.parse_args(argv[1:])
 
